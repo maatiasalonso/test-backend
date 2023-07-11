@@ -1,0 +1,63 @@
+service: test-backend
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:us-east-2:621971788452:table/VideosTable
+
+functions:
+  api:
+    handler: src/index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+  addVideo:
+    handler: src/add-video.handler
+    events:
+      - http:
+          path: /videos
+          method: post
+          cors: true
+  getVideos:
+    handler: src/get-videos.handler
+    events:
+      - http:
+          path: /videos
+          method: get
+          cors: true
+  getVideo:
+    handler: src/get-video.handler
+    events:
+      - http:
+          path: /videos/{id}
+          method: get
+          cors: true
+  deleteVideo:
+    handler: src/delete-video.handler
+    events:
+      - http:
+          path: /videos/{id}
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    Afex:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: VideosTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
