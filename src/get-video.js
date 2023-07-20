@@ -29,9 +29,6 @@ module.exports.handler = async (event) => {
 
   const data = {
     id: video.id,
-    title: video.snippet.title,
-    description: video.snippet.description,
-    thumbnail: video.snippet.thumbnails.default.url,
   };
 
   return {
