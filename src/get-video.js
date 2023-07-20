@@ -1,4 +1,3 @@
-require("dotenv").config();
 const AWS = require("aws-sdk");
 const { google } = require("googleapis");
 const apiKey = process.env.GOOGLE_API_KEY;
