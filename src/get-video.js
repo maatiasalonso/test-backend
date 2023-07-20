@@ -1,6 +1,7 @@
+require("dotenv").config();
 const AWS = require("aws-sdk");
 const { google } = require("googleapis");
-const apiKey = "AIzaSyBidDSHBjXC7YmrBj7HXY-oT07EIS3cyH4";
+const apiKey = process.env.GOOGLE_API_KEY;
 const youtube = google.youtube({
   version: "v3",
   auth: apiKey,

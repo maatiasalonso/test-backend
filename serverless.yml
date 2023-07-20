@@ -11,7 +11,12 @@ provider:
         - dynamodb:*
       Resource:
         - arn:aws:dynamodb:us-east-2:621971788452:table/VideosTable
+  environment:
+    GOOGLE_API_KEY: ${self:custom.apiKey}
 
+custom:
+  apiKey: ${file(./config.yml):GOOGLE_API_KEY}
+  
 functions:
   api:
     handler: src/index.handler
