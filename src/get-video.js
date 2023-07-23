@@ -25,11 +25,7 @@ module.exports.handler = async (event) => {
     id: res.Items[0].videoId,
   });
 
-  const video = response.data.items[0];
-
-  const data = {
-    id: video.id,
-  };
+  const data = response.data.items[0];
 
   return {
     statusCode: 200,
